@@ -21,6 +21,6 @@ file.close()
 spamAverage /= spam
 hamAverage /= ham
 
-print(hamAverage)
-print(spamAverage)
-print(spamExclamation)
+print(f'Average ham: {hamAverage}')
+print(f'Average spam: {spamAverage}')
+print(f'Total exclamation:{spamExclamation}')
