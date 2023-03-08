@@ -1,32 +1,14 @@
-def mean(list):
-    sum = 0
-    for i in range(len(list)):
-        sum += list[i]
-    average = sum/len(list)
-    return average
-
-
-
-
-list=[]
-while True:
-    n=input('Input a number: ')
-    if n=='Done':
-        print(f'Number count: {len(list)}, Minimal value: {min(list)}, Maximum value: {max(list)}')
-    list.append(n)
-
 list = []
 
-while 1:
+while True:
     try:
-        temp = input('Unesi broj: ')
-        if temp == 'Done':
+        n = input('Unesi broj: ')
+        if n == 'Done':
             break
-        list.append(float(temp))
+        list.append(float(n))
     except:
-        print('NaN exception')
+        print('Not a number')
 
-print(len(list))
 list.sort()
 max = list[0]
 min = list[0]
@@ -40,10 +22,7 @@ for i in range(1, len(list)):
     average += list[i]
 
 average /= len(list)
-print(average)
-print(max)
-print(min)
-print(list)
+print(f'Količina brojeva: {len(list)}, Srednja vrijednost: {average}, Minimalna vrijednost:{min}, Maksimalna vrijednost:{max}, Sortirana lista:{list}')
 
 
 
