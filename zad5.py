@@ -14,7 +14,7 @@ for line in file:
     else:
         spam += 1
         spamAverage += (len(line) - 1)
-        if line[len(line) - 1].__contains__('!'):
+        if line[- 1].endswith('!'):
             spamExclamation += 1
 file.close()
 
