@@ -6,20 +6,23 @@ from sklearn.preprocessing import OneHotEncoder
 import sklearn.linear_model as lm
 import sklearn.metrics as skmetrics
 
-input = pd.read_csv("data_C02_emission.csv")
-X_labels = ['Fuel Consumption City (L/100km)',
-                   'Fuel Consumption Hwy (L/100km)',
-                   'Fuel Consumption Comb (L/100km)',
-                   'Fuel Consumption Comb (mpg)',
-                   'Engine Size (L)',
-                   'Cylinders']
+data = pd.read_csv("data_C02_emission.csv")
+#data =data.drop(["Make", 'Vehicle Class', 'Transmission'], axis=1)
+X_labels = ['Engine Size (L)',
+            'Fuel Consumption City (L/100km)',
+           'Cylinders',
+           'Fuel Consumption Hwy (L/100km)',
+           'Fuel Consumption Comb (L/100km)',
+           'Fuel Consumption Comb (mpg)',
+           'Fuel Type']
 y_label = ['CO2 Emissions (g/km)']
 
 ohe = OneHotEncoder()
-fuel = np.array(ohe.fit_transform(input[[X_labels[6]]]).toarray())
-y = input[y_label].to_numpy()
-X = input[X_labels[0:6]].to_numpy()
-X = np.append(X, fuel, axis = 1)
+#fit_transform ocekuje 2d array(dataframe[[stupac(i)]]), ne moze 1d (series[stupac])
+X_enc = ohe.fit_transform(data[['Fuel Type']]).toarray()
+data['Fuel Type'] = X_enc
+X=data[X_labels].to_numpy()
+y=data[y_labels].to_numpy()
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 1)
 
 linearModel = lm.LinearRegression()
@@ -34,10 +37,10 @@ plt.scatter(x = y_test,
 plt.plot(y_test, y_test, color = 'black', linestyle = 'dashed')
 plt.xlabel("Test values")
 plt.ylabel("Predicted values")
-
-error = abs(y_test - y_test_p)
-max_error = np.argmax(error)
-print(error[max_error])
-print(input.iloc[max_error][['Make', 'Model']])
-
 plt.show()
+
+abs = abs(y_test - y_test_p)
+max = np.argmax(abs)
+print(abs[max])
+print(data.at[data.index[max], 'Model'])
+
