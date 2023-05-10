@@ -10,6 +10,7 @@ import sklearn.metrics as skmetrics
 #a) Odaberite željene numericke velicine specificiranjem liste s nazivima stupaca. Podijelite
 #podatke na skup za ucenje i skup za testiranje u omjeru 80%-20%.
 data = pd.read_csv("data_C02_emission.csv")
+#data =data.drop(["Make", "Model"], axis=1)
 input_variables = ['Fuel Consumption City (L/100km)',
                    'Fuel Consumption Hwy (L/100km)',
                    'Fuel Consumption Comb (L/100km)',
@@ -18,6 +19,7 @@ input_variables = ['Fuel Consumption City (L/100km)',
                    'Cylinders']
 
 output_variable = ['CO2 Emissions (g/km)']
+#pošto je lakše raditi s numpy arrayevima nego s DataFrameom pretvaramo u numpy array jer će ono stalno vraćati numpy
 X = data[input_variables].to_numpy()
 y = data[output_variable].to_numpy()
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 1)
@@ -42,6 +44,11 @@ for i in range(len(input_variables)):
     plt.ylabel(output_variable[0])
     plt.legend()
     plt.figure()
+    plt.show()
+    
+#ili ako smo samo htjeli sami izvući stupac
+#plt.scatter(x=X_train[:,0], y=y_train, c='b')
+#plt.scatter(x=X_test[:,0], y=y_test, c='r')
 
 #c)Izvršite standardizaciju ulaznih velicina skupa za ucenje. Prikažite histogram vrijednosti
 #jedne ulazne velicine prije i nakon skaliranja. Na temelju dobivenih parametara skaliranja
@@ -57,12 +64,25 @@ for i in range(len(input_variables)):
     plt.hist(X_train_s_tsposed[i])
     plt.title(input_variables[i] + " after fit")
     plt.figure()
+    plt.show()
 X_test_s = ss.transform(X_test)
+
+#mogli smo i MinMaxScalerom 
+#scaler= MinMaxScaler()
+#plt.figure()
+#X_train_n= scaler.fit_transform(X_train)
+#X_test_n= scaler.transform(X_test)
+#plt.hist(X_train[:,0])
+#plt.figure()
+#plt.hist(X_train_n[:,0])
+
 
 #d) Izgradite linearni regresijski modeli. Ispišite u terminal dobivene parametre modela i povežite ih s izrazom 4.6.
 linearModel = lm.LinearRegression()
 linearModel.fit(X_train_s, y_train)
 print(linearModel.coef_)
+#print(f'Parametri modela: {linearModel.coef_}')
+#print(f'Intercept parametar: {linearModel.intercept_}')
 
 #e) Izvršite procjenu izlazne veliˇcine na temelju ulaznih veliˇcina skupa za testiranje. Prikažite
 #pomocu dijagrama raspršenja odnos izme du stvarnih vrijednosti izlazne velicine i procjene dobivene modelom.
@@ -74,6 +94,7 @@ plt.scatter(x = y_test,
 plt.plot(y_test, y_test, color = 'black', linestyle = 'dashed')
 plt.xlabel("Test values")
 plt.ylabel("Predicted values")
+plt.show()
 
 #f) Izvršite vrednovanje modela na nacin da izracunate vrijednosti regresijskih metrika na skupu podataka za testiranje.
 MSE = skmetrics.mean_squared_error(y_test, y_test_p)
@@ -86,7 +107,7 @@ print("Rsquared: ", skmetrics.r2_score(y_test, y_test_p))
 
 #g) Što se dogada s vrijednostima evaluacijskih metrika na testnom skupu kada mijenjate broj ulaznih velicina?
 sample = 0.2
-for i in range(10):
+for i in range(10):                               #mogli smo i ručno samo izbrisati stupce ulaznih podataka
     sample += 0.05
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = sample, random_state = 1)
     ss = StandardScaler()
