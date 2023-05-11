@@ -107,3 +107,26 @@ class_report = classification_report(y_test, y_test_p)
 print('Confusion Matrix:',cm)
 print('\nClassification Report:',class_report)
 
+#f)Dodajte u model još ulaznih veliˇcina. Što se doga ¯ da s rezultatima klasifikacije na skupu podataka za testiranje?
+output_variable = ['species']
+input_variables = ['bill_length_mm',
+                    'flipper_length_mm',
+                    'body_mass_g']
+
+X = df[input_variables].to_numpy()
+y = df[output_variable].to_numpy()
+y=y[:,0]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 123)
+
+LogisticRegression_model2 = LogisticRegression()
+log_reg = LogisticRegression_model2.fit(X_train, y_train)
+
+y_predict2 = LogisticRegression_model2.predict(X_test)
+
+cm = confusion_matrix(y_test, y_predict2)
+print("Matrica:", cm)
+disp = ConfusionMatrixDisplay(confusion_matrix(y_test, y_predict2))
+disp.plot()
+print("Tocnost:", accuracy_score(y_test, y_predict2))
+print(classification_report(y_test, y_predict2))
+plt.show()
