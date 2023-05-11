@@ -51,7 +51,7 @@ labels = kmeans.predict(img_array_aprox)
 #zamjena originalne slike sa njemu pripadajućim centrom
 img_array_quantized = kmeans.cluster_centers_[labels]
 img_quantized = np.reshape(img_array_quantized, (w, h, d))
-img_quantized = (img_quantized * 255).astype(np.uint8)  #konveritiranje slike natrag u int rasponu
+img_quantized = (img_quantized * 255).astype(np.uint8)  #pikseli su u floatu!
 plt.imshow(img_quantized)
 plt.title("Kvantizirana slika")
 plt.show()
