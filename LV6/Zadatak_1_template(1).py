@@ -65,11 +65,9 @@ LogReg_model = LogisticRegression(penalty=None)
 LogReg_model.fit(X_train_n, y_train)
 
 # Evaluacija modela logisticke regresije
-y_train_p = LogReg_model.predict(X_train_n)
 y_test_p = LogReg_model.predict(X_test_n)
 
 print("Logisticka regresija: ")
-print("Tocnost train: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p))))
 print("Tocnost test: " + "{:0.3f}".format((accuracy_score(y_test, y_test_p))))
 
 # granica odluke pomocu logisticke regresije
@@ -89,12 +87,9 @@ KNN_model.fit(X_train_n,y_train)
 # predikcija na skupu podataka za treniranje i testiranje
 plot_decision_regions(X_train_n, y_train, classifier=KNN_model)
 plt.legend(loc='upper left')
-y_train_p = KNN_model.predict(X_train_n)
 y_test_p = KNN_model.predict(X_test_n)
 print("KNN: ")
-print("Tocnost train: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p))))
 print("Tocnost test: " + "{:0.3f}".format((accuracy_score(y_test, y_test_p))))
-plt.title("Tocnost: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p))))
 plt.xlabel('x1')
 plt.ylabel('x2')
 plt.show()
@@ -118,12 +113,9 @@ SVM_model.fit(X_train_n,y_train)
 
 plot_decision_regions(X_train_n, y_train, classifier=SVM_model)
 plt.legend(loc='upper left')
-y_train_p = SVM_model.predict(X_train_n)
 y_test_p = SVM_model.predict(X_test_n)
 print("SVM: ")
-print("Tocnost train: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p))))
 print("Tocnost test: " + "{:0.3f}".format((accuracy_score(y_test, y_test_p))))
-plt.title("Tocnost: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p))))
 plt.xlabel('x_1')
 plt.ylabel('x_2')
 plt.show()
