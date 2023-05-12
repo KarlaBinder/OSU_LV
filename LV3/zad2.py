@@ -42,5 +42,26 @@ plt.subplot(212)
 data.groupby('Cylinders')['CO2 Emissions (g/km)'].mean().plot(kind = 'bar')
 plt.show()
 
+#primjer zadataka
+"""
+var = data[data['?'] == '?']
+var2 = data[data['?'] == '?']
+var 1.0 = var[(data['?']==?)]
+var2.0 = var2[(data['?']==?)]
+
+data_sexes=np.unique(data['?'])
+
+plt.bar(data_sexes,[len(var 2.0)/len(var2),len(var 1.0)/len(var)])
+plt.title("Postotci ")
+plt.show()
+
+print('Prosjek:', var 1.0 ['?'].mean())
+print('Prosjek', var 2.0 ['?'].mean())
+
+print(np.min(var 1.0[(var 1.0['?']==?)]['?']))
+print(np.min(var 1.0[(var 1.0['?']==?)]['?']))
+print(np.min(var 1.0[(var 1.0['?']==?)]['?'])
+"""
+
 
 
