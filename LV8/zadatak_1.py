@@ -43,14 +43,14 @@ y_test_s = keras.utils.to_categorical(y_test, num_classes)
 
 # TODO: kreiraj model pomocu keras.Sequential(); prikazi njegovu strukturu
 model = keras.Sequential()
-model.add(layers.Input(shape=(784, )))
-model.add(layers.Dense(100, activation="relu"))
+model.add(layers.Input(shape=(784, )))     #broj ovisno koji nam se zada,ako kaže npr. 10 varijabli onda je (shape=(10, ))
+model.add(layers.Dense(100, activation="relu"))  #paziti na broj neurona i vrstu aktivacije
 model.add(layers.Dense(50, activation="relu"))
 model.add(layers.Dense(10, activation="softmax"))
 model.summary()
 
 # TODO: definiraj karakteristike procesa ucenja pomocu .compile()
-model.compile(loss="categorical_crossentropy",optimizer="adam",metrics=["accuracy",])
+model.compile(loss="categorical_crossentropy",optimizer="adam",metrics=["accuracy",])  #paziti što se zada
 
 
 # TODO: provedi ucenje mreze
@@ -68,7 +68,7 @@ score = model.evaluate(x_test, y_test_ohe, verbose=0)
 # TODO: Prikazi test accuracy i matricu zabune
 y_test_pred = model.predict(x_test)      #ne vraca znamenke koje trebaju za confusion matrix,vraca za svaki primjer vektor vjerojatnosti pripadanja svakoj od 10 klasa (softmax) (10 000,10)
 y_test_pred = np.argmax(y_test_pred, axis=1)  #vraća polje indeksa najvecih elemenata u svakom pojedinom retku (1d polju) (0-9) (10 000,) - 1d polje
-
+#y_test:pred = np.around(y_predictions).astype(np.int32)  
 cm = confusion_matrix(y_test, y_test_pred)
 print("Matrica zabune:", cm)
 disp = ConfusionMatrixDisplay(confusion_matrix(y_test, y_test_pred))
@@ -77,3 +77,10 @@ plt.show()
 
 # TODO: spremi model
 model.save('KerasModel')
+#može tražiti i da iz učitanog modela radimo s podacima
+#model = load_model('KerasModel')
+#score = model.evaluate(X_test, y_test, verbose=0)
+#for i in range(len(model.metrics_names)):
+ #   print(f'{model.metrics_names[i]} = {score[i]}')
+    
+
