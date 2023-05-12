@@ -11,6 +11,11 @@ import sklearn.metrics as skmetrics
 #podatke na skup za ucenje i skup za testiranje u omjeru 80%-20%.
 data = pd.read_csv("data_C02_emission.csv")
 #data =data.drop(["Make", "Model"], axis=1)
+#ukoliko smo ovako učitali datoteku : data = np.loadtxt('data_C02_emission.csv', delimiter=',', skiprows=1)
+#bitno je da ju prebacimo u DataFrame: data_df = pd.DataFrame(data, columns=['column_name', 'column_name', 'column_name'])
+#kada smo učitali podatke stupaca maknemo izlaznu varijablu i nju stavimo u zasebno
+#X = data_df.drop(columns=['izlazna_veličina']).to_numpy()
+#y = data_df['izlazna_veličina'].copy().to_numpy()
 input_variables = ['Fuel Consumption City (L/100km)',
                    'Fuel Consumption Hwy (L/100km)',
                    'Fuel Consumption Comb (L/100km)',
