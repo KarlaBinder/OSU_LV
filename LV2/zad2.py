@@ -4,15 +4,27 @@ import matplotlib.pyplot as plt
 arra= np.loadtxt('data.csv', delimiter=',', skiprows=1, dtype=float)
 #imamo 2 načina importanja datoteka preko numpyja loadtxt i genfromtxt
 #arra=np.genfromtxt('data.csv', delimiter=',',dtype= None, encoding=None,skip_header=1)
+#paziti ukoliko dobijemo datoteku koja ima nazive stupaca po redovima da pozovemo funckiju skiprows=broj tih redova, isto paziti na dtype ukoliko imamo 
+#različite vrijednosti
 
 #a) Na koliko je osoba izvršeno mjerenja?
 size=len(arra)
 print('Izvrseno je mjenjenja na:', size)
-size=int(size)           #ili arra.shape
+#size=int(size)           #ili arra.shape
+
+#Ukoliko smo učitali podatke preko numpy a trebamo pogledati izostale i duplicirane vrijednosti ovako prebacujemo
+#data_df = pd.DataFrame(data)
+#print(f'Broj dupliciranih: {data_df.duplicated().sum()}')
+#print(f'Broj izostalih: {data_df.isnull().sum()} ')
+#data_df = data_df.drop_duplicates()
+#data_df = data_df.dropna(axis=0) 
+#data = data[data[:,5]!=0.0] # izbacivanje sve s 0.0 u 6.stupcu
+#data_df = pd.DataFrame(data) #kreiranje ponovno data_df ali ovaj put s očišćenim podacima 
+#print(f'Broj preostalih: {len(data_df)}') 
 
 #b) Prikaži odnos visine i mase
 x=np.array(arra[:,1])      #da smo koristili genfromtxt ovako bi izgledalo x=arra[:,1] 
-y=np.array(arra[:,2])
+y=np.array(arra[:,2])             #paziti možda ne mora biti np.array nego samo kao iznad
 plt.title('Odnos svih visina i tezina')
 plt.scatter(x,y,alpha=0.5,c='b', linewidths=1)
 plt.show()
