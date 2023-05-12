@@ -105,6 +105,7 @@ data['?'] =labels
 #iz dataframe u numpy polje
 X = data[input_variables].to_numpy()
 y=data[output_variables].to_numpy()
+#y = data["output_variables"].to_numpy().reshape(-1, 1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 1)
 #skaliranje
 sc = StandardScaler()
