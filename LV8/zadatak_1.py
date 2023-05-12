@@ -83,4 +83,60 @@ model.save('KerasModel')
 #for i in range(len(model.metrics_names)):
  #   print(f'{model.metrics_names[i]} = {score[i]}')
     
+#još jedan primjer ovakoga zadatka
+"""
+#učitaj datoteku
+data = pd.read_csv('?.csv')
+#makni izostale i duplikate
+data.dropna(axis=0)
+data.drop_duplicates()
+#koliko god se traći ulaznih i izlaznih varijabli
+input_variables = ['?','?','?','?']
+output_variables = ['*']
+#ukoliko jedna od varijabli je string vrijednost
+enc = OneHotEncoder()
+X_encode = enc.fit_transform(data[['?']]).toarray()
+labels = np.argmax(X_encode, axis=1)
+data['?'] =labels 
+
+X_encode = enc.fit_transform(data[['?']]).toarray()
+labels = np.argmax(X_encode, axis=1)
+data['?'] =labels 
+#iz dataframe u numpy polje
+X = data[input_variables].to_numpy()
+y=data[output_variables].to_numpy()
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 1)
+#skaliranje
+sc = StandardScaler()
+X_train_n = sc.fit_transform(X_train)
+X_test_n = sc.transform(X_test)
+
+model = keras.Sequential()
+model.add(layers.Input(shape=(4,)))
+model.add(layers.Dense(16, activation="relu"))
+model.add(layers.Dense(8,activation="relu"))
+model.add(layers.Dense(4, activation="relu"))
+model.add(layers.Dense(1, activation="sigmoid"))
+model.summary()
+
+model.compile(loss="binary_crossentropy", optimizer="adam", metrics="accuracy")
+
+history = model.fit(X_train_n, y_train, batch_size = 5, epochs =10, validation_split = 0.1)
+predictions = model.predict(X_test)
+
+model.save("?")
+
+model = load_model('?')
+
+score=model.evaluate(X_test_n,y_test,verbose=0)
+
+predictions=model.predict(X_test_n)
+predictions=np.around(predictions).astype(np.int32)
+cm=confusion_matrix(y_test,predictions)
+cm_disp=ConfusionMatrixDisplay(cm)
+cm_disp.plot()
+plt.show()
+"""
+
+    
 
