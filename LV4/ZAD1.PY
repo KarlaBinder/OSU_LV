@@ -16,6 +16,13 @@ data = pd.read_csv("data_C02_emission.csv")
 #kada smo učitali podatke stupaca maknemo izlaznu varijablu i nju stavimo u zasebno
 #X = data_df.drop(columns=['izlazna_veličina']).to_numpy()
 #y = data_df['izlazna_veličina'].copy().to_numpy()
+
+#ako bismo učitali neki dataset
+#dataset = datasets.load_dataset()
+#data = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)
+#data['target'] = dataset.target
+#data.to_csv('dataset.csv', index=False)
+#print(data.info)
 input_variables = ['Fuel Consumption City (L/100km)',
                    'Fuel Consumption Hwy (L/100km)',
                    'Fuel Consumption Comb (L/100km)',
